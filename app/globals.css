@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --color-brand: #0176d3;
+  --color-brand-dark: #014486;
+  --color-brand-light: #eef4ff;
+  --color-page: #f3f3f3;
+  --color-line: #e5e5e5;
+  --color-ink: #181818;
+  --color-muted: #5c5c5c;
+  --color-success: #2e844a;
+  --color-danger: #ba0517;
+}
+
+html,
+body {
+  background: var(--color-page);
+  color: var(--color-ink);
+}
+
+/* Lightning-style backdrop band behind page content */
+.app-backdrop {
+  background:
+    linear-gradient(180deg, rgba(1, 118, 211, 0.18) 0, rgba(1, 118, 211, 0.06) 140px, transparent 260px),
+    var(--color-page);
+}
+
+@layer components {
+  .card {
+    @apply rounded-lg border border-line bg-white shadow-[0_2px_2px_0_rgba(0,0,0,0.06)];
+  }
+  .btn {
+    @apply inline-flex h-8 items-center justify-center gap-1.5 rounded border border-[#c9c9c9] bg-white px-4 text-[13px] font-normal text-brand transition-colors hover:bg-[#f3f3f3] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-brand {
+    @apply inline-flex h-8 items-center justify-center gap-1.5 rounded border border-brand bg-brand px-4 text-[13px] font-normal text-white transition-colors hover:border-brand-dark hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-danger {
+    @apply inline-flex h-8 items-center justify-center gap-1.5 rounded border border-danger bg-white px-4 text-[13px] text-danger transition-colors hover:bg-[#fef1ee];
+  }
+  .input {
+    @apply h-8 w-full rounded border border-[#c9c9c9] bg-white px-3 text-[13px] text-ink outline-none transition-shadow placeholder:text-[#939393] focus:border-brand focus:shadow-[0_0_3px_#0176d3];
+  }
+  .label {
+    @apply mb-0.5 block text-xs text-muted;
+  }
+  .link {
+    @apply text-brand hover:underline;
+  }
+  .th {
+    @apply h-8 border-b border-line bg-[#f3f3f3] px-3 text-left text-xs font-bold text-muted whitespace-nowrap;
+  }
+  .td {
+    @apply h-9 border-b border-line px-3 text-[13px] whitespace-nowrap;
+  }
+}
