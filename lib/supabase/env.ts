@@ -1,0 +1,13 @@
+export function supabaseEnv() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  // Accept either the new publishable key or the legacy anon key
+  // (the Vercel ↔ Supabase integration sets NEXT_PUBLIC_SUPABASE_ANON_KEY).
+  const key =
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) {
+    throw new Error(
+      "Missing Supabase env vars. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (see .env.example).",
+    );
+  }
+  return { url, key };
+}
