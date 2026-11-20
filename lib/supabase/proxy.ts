@@ -22,8 +22,14 @@ export async function updateSession(request: NextRequest) {
   });
 
   // Refreshes the auth token if needed. Do not put code between client creation and this call.
-  const { data } = await supabase.auth.getClaims();
-  const signedIn = Boolean(data?.claims);
+  let signedIn = false;
+  try {
+    const { data } = await supabase.auth.getClaims();
+    signedIn = Boolean(data?.claims);
+  } catch (err) {
+    // Never take the whole site down because the auth check failed; treat as signed out.
+    console.error("Session check failed", err);
+  }
   const path = request.nextUrl.pathname;
   const isPublic = PUBLIC_PATHS.some((p) => path === p || path.startsWith(`${p}/`));
 
